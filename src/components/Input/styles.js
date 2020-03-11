@@ -15,5 +15,5 @@ export const TInput = styled.TextInput.attrs({
   flex: 1;
   font-size: 15px;
   margin-left: 10px;
-  color: #fff;
+  color: #999999;
 `;

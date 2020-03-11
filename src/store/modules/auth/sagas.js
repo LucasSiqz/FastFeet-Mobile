@@ -11,7 +11,7 @@ export function* singIn({ payload }) {
   try {
     const { id } = payload;
 
-    const response = yield call(api.get, `deliverymen/${id}`);
+    const response = yield call(api.get, `deliverymans/${id}`);
 
     yield put(
       signInSuccess(id, {
