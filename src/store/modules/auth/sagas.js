@@ -7,18 +7,20 @@ import api from '../../../services/api';
 
 import { signInSuccess, signFailure } from './actions';
 
-export function* singIn({ payload }) {
+export function* signIn({ payload }) {
   try {
     const { id } = payload;
 
     const response = yield call(api.get, `deliverymans/${id}`);
 
+    const { name, email, createdAt, avatar } = response.data;
+
     yield put(
       signInSuccess(id, {
-        name: response.data.name,
-        email: response.data.email,
-        created_at: format(parseISO(response.data.created_at), 'dd/MM/yyyy'),
-        avatar: response.data.avatar,
+        name,
+        email,
+        created_at: format(parseISO(createdAt), 'dd/MM/yyyy'),
+        avatar,
       }),
     );
   } catch (err) {
@@ -30,4 +32,4 @@ export function* singIn({ payload }) {
   }
 }
 
-export default all([takeLatest('@auth/SIGN_IN_REQUEST', singIn)]);
+export default all([takeLatest('@auth/SIGN_IN_REQUEST', signIn)]);
