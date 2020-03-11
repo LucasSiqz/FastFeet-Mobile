@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import SignIn from './pages/SignIn';
 
@@ -124,7 +124,7 @@ export default function createRouter(isSigned = false) {
         options={{
           tabBarLabel: 'Entregas',
           tabBarIcon: ({ color }) => (
-            <Icon name="add-circle-outline" size={20} color={color} />
+            <Icon name="view-headline" size={20} color={color} />
           ),
         }}
       />
@@ -134,7 +134,7 @@ export default function createRouter(isSigned = false) {
         options={{
           tabBarLabel: 'Meu Perfil',
           tabBarIcon: ({ color }) => (
-            <Icon name="person" size={20} color={color} />
+            <Icon name="account-circle" size={20} color={color} />
           ),
         }}
       />
