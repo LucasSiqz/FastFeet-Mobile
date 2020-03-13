@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { StatusBar } from 'react-native';
 
 import { Container, Title, Item, Avatar, LogoutButton } from './styles';
 
@@ -16,6 +17,7 @@ export default function Profile() {
 
   return (
     <Container>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <Avatar source={{ uri: url }} />
       <Title>Nome completo</Title>
       <Item>{name}</Item>
