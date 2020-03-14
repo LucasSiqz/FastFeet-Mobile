@@ -54,6 +54,8 @@ export default function Orders() {
         const data = response.data.map(order => ({
           ...order,
           create_date_formated: format(parseISO(order.createdAt), 'dd/MM/yyyy'),
+          city: order.recipient.city,
+          isWithdrawal: !!order.start_date,
         }));
 
         setOrdersData(data);
@@ -63,6 +65,8 @@ export default function Orders() {
         const data = response.data.map(order => ({
           ...order,
           create_date_formated: format(parseISO(order.createdAt), 'dd/MM/yyyy'),
+          city: order.recipient.city,
+          isWithdrawal: !!order.start_date,
         }));
 
         setOrdersData(data);
@@ -114,9 +118,9 @@ export default function Orders() {
               <Progress>
                 <Circle background="#7d40e7" />
                 <Line />
-                <Circle background="#fff" />
+                <Circle background={order.isWithdrawal ? '#7d40e7' : '#fff'} />
                 <Line />
-                <Circle background="#fff" />
+                <Circle background={oldOrders ? '#7d40e7' : '#fff'} />
               </Progress>
               <ProgressTitles>
                 <ProgressTitle>Aguardando{'\n\t'}Retirada</ProgressTitle>
@@ -131,7 +135,7 @@ export default function Orders() {
               </InfoContent>
               <InfoContent>
                 <InfoTitle>Cidade</InfoTitle>
-                <Info>{order.recipient.city}</Info>
+                <Info>{order.city}</Info>
               </InfoContent>
               <TouchableOpacity>
                 <DetailButtom>Ver detalhes</DetailButtom>
