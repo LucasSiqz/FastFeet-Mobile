@@ -57,6 +57,7 @@ export default function Orders() {
           ...order,
           create_date_formated: format(parseISO(order.createdAt), 'dd/MM/yyyy'),
           city: order.recipient.city,
+          status: 'Entregue',
           isWithdrawal: !!order.start_date,
         }));
 
@@ -68,6 +69,7 @@ export default function Orders() {
           ...order,
           create_date_formated: format(parseISO(order.createdAt), 'dd/MM/yyyy'),
           city: order.recipient.city,
+          status: 'Pendente',
           isWithdrawal: !!order.start_date,
         }));
 
