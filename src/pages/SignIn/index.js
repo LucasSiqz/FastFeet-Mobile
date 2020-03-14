@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Image } from 'react-native';
+import { StatusBar, Image } from 'react-native';
 
 import logo from '../../assets/logo.png';
 
@@ -21,6 +21,8 @@ export default function SignIn() {
 
   return (
     <Container>
+      <StatusBar barStyle="light-content" backgroundColor="#7D40E7" />
+
       <Image source={logo} />
       <Form>
         <FormInput

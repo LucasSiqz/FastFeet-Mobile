@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -23,8 +23,11 @@ const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 function NewStack() {
+  const navigation = useNavigation();
+
   return (
     <Stack.Navigator
+      initialRouteName="Orders"
       screenOptions={{
         headerTransparent: true,
         headerTintColor: '#FFF',
@@ -44,7 +47,7 @@ function NewStack() {
         component={OrderDetail}
         options={{
           title: 'Detalhes da encomenda',
-          headerLeft: ({ navigation }) => (
+          headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
                 navigation.goBack();
@@ -61,7 +64,7 @@ function NewStack() {
           title: 'Informar problema',
           headerLeft: () => (
             <TouchableOpacity
-              onPress={({ navigation }) => {
+              onPress={() => {
                 navigation.goBack();
               }}>
               <Icon name="chevron-left" size={20} color="#FFF" />
@@ -76,7 +79,7 @@ function NewStack() {
           title: 'Visualizar problemas',
           headerLeft: () => (
             <TouchableOpacity
-              onPress={({ navigation }) => {
+              onPress={() => {
                 navigation.goBack();
               }}>
               <Icon name="chevron-left" size={20} color="#FFF" />
@@ -91,7 +94,7 @@ function NewStack() {
           title: 'Confirmar entrega',
           headerLeft: () => (
             <TouchableOpacity
-              onPress={({ navigation }) => {
+              onPress={() => {
                 navigation.goBack();
               }}>
               <Icon name="chevron-left" size={20} color="#FFF" />

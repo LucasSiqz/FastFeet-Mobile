@@ -4,6 +4,7 @@ import { StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { parseISO, format } from 'date-fns';
+import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
 import { signOut } from '../../store/modules/auth/actions';
@@ -39,6 +40,7 @@ import {
 Icon.loadFont();
 
 export default function Orders() {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const { id } = useSelector(state => state.auth);
   const { name } = useSelector(state => state.user.profile);
@@ -137,7 +139,8 @@ export default function Orders() {
                 <InfoTitle>Cidade</InfoTitle>
                 <Info>{order.city}</Info>
               </InfoContent>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('OrderDetail', { order })}>
                 <DetailButtom>Ver detalhes</DetailButtom>
               </TouchableOpacity>
             </OrderInfo>
