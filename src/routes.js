@@ -50,7 +50,7 @@ function NewStack() {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.goBack();
+                navigation.navigate('Orders');
               }}>
               <Icon name="chevron-left" size={20} color="#FFF" />
             </TouchableOpacity>

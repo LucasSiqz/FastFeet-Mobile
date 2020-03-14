@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { parseISO, format } from 'date-fns';
@@ -14,6 +15,10 @@ import {
   Item,
   DatesContainer,
   DateItem,
+  OptionsContainer,
+  Option,
+  OptionTitle,
+  OptionMiddle,
 } from './styles';
 
 export default function OrderDetail() {
@@ -22,6 +27,7 @@ export default function OrderDetail() {
 
   return (
     <Container>
+      <StatusBar barStyle="light-content" backgroundColor="#7D40E7" />
       <Background />
       <Content>
         <Card>
@@ -65,6 +71,27 @@ export default function OrderDetail() {
             </DateItem>
           </DatesContainer>
         </Card>
+        <OptionsContainer>
+          <Option>
+            <Icon name="close-circle-outline" size={25} color="#E74040" />
+            <OptionTitle> Informar{'\n'}Problema</OptionTitle>
+          </Option>
+          <OptionMiddle>
+            <Icon name="information-outline" size={25} color="#E7BA40" />
+            <OptionTitle> Visualizar{'\n'}Problemas</OptionTitle>
+          </OptionMiddle>
+          {order.start_date ? (
+            <Option>
+              <Icon name="check-circle-outline" size={25} color="#7D40E7" />
+              <OptionTitle>Confirmar{'\n\t'}Entrega</OptionTitle>
+            </Option>
+          ) : (
+            <Option>
+              <Icon name="check-circle-outline" size={25} color="#7D40E7" />
+              <OptionTitle>Confirmar{'\n\t'}Retirada</OptionTitle>
+            </Option>
+          )}
+        </OptionsContainer>
       </Content>
     </Container>
   );
