@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { parseISO, format } from 'date-fns';
+
+import api from '../../services/api';
+import { signOut } from '../../store/modules/auth/actions';
 
 import {
   Container,
@@ -34,8 +39,42 @@ import {
 Icon.loadFont();
 
 export default function Orders() {
+  const dispatch = useDispatch();
+  const { id } = useSelector(state => state.auth);
   const { name } = useSelector(state => state.user.profile);
   const { url } = useSelector(state => state.user.profile.avatar);
+  const [ordersData, setOrdersData] = useState([{}]);
+  const [oldOrders, setOldOrders] = useState(false);
+
+  useEffect(() => {
+    async function loadInitialData() {
+      if (oldOrders) {
+        const response = await api.get(`deliveryman/${id}/deliveries?old=true`);
+
+        const data = response.data.map(order => ({
+          ...order,
+          create_date_formated: format(parseISO(order.createdAt), 'dd/MM/yyyy'),
+        }));
+
+        setOrdersData(data);
+      } else {
+        const response = await api.get(`deliveryman/${id}/deliveries`);
+
+        const data = response.data.map(order => ({
+          ...order,
+          create_date_formated: format(parseISO(order.createdAt), 'dd/MM/yyyy'),
+        }));
+
+        setOrdersData(data);
+      }
+    }
+
+    loadInitialData();
+  }, [id, oldOrders]);
+
+  function handleLogout() {
+    dispatch(signOut());
+  }
 
   return (
     <Container>
@@ -48,48 +87,58 @@ export default function Orders() {
           <Title>{name}</Title>
         </WelcomeTextContainer>
         <IconContainer>
-          <Icon name="logout-variant" size={25} color="#E74040" />
+          <TouchableOpacity onPress={handleLogout}>
+            <Icon name="logout-variant" size={25} color="#E74040" />
+          </TouchableOpacity>
         </IconContainer>
       </InitialContent>
       <MediumContent>
         <Title>Entregas</Title>
         <Options>
-          <Option>Pendentes</Option>
-          <Option>Entregues</Option>
+          <TouchableOpacity onPress={() => setOldOrders(false)}>
+            <Option style={oldOrders}>Pendentes</Option>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setOldOrders(true)}>
+            <Option style={!oldOrders}>Entregues</Option>
+          </TouchableOpacity>
         </Options>
       </MediumContent>
       <OrdersList>
-        <Order>
-          <InitialOrderContent>
-            <Icon name="truck" size={25} color="#7D40E7" />
-            <OrderId>Encomenda 01</OrderId>
-          </InitialOrderContent>
-          <OrderStatus>
-            <Progress>
-              <Circle />
-              <Line />
-              <Circle />
-              <Line />
-              <Circle />
-            </Progress>
-            <ProgressTitles>
-              <ProgressTitle>Aguardando{'\n\t'}Retirada</ProgressTitle>
-              <ProgressTitle>Retirada</ProgressTitle>
-              <ProgressTitle>Entregue</ProgressTitle>
-            </ProgressTitles>
-          </OrderStatus>
-          <OrderInfo>
-            <InfoContent>
-              <InfoTitle>Data</InfoTitle>
-              <Info>14/01/2020</Info>
-            </InfoContent>
-            <InfoContent>
-              <InfoTitle>Cidade</InfoTitle>
-              <Info>Diadema</Info>
-            </InfoContent>
-            <DetailButtom>Ver detalhes</DetailButtom>
-          </OrderInfo>
-        </Order>
+        {ordersData.map(order => (
+          <Order key={order.id}>
+            <InitialOrderContent>
+              <Icon name="truck" size={25} color="#7D40E7" />
+              <OrderId>Encomenda {order.id}</OrderId>
+            </InitialOrderContent>
+            <OrderStatus>
+              <Progress>
+                <Circle background="#7d40e7" />
+                <Line />
+                <Circle background="#fff" />
+                <Line />
+                <Circle background="#fff" />
+              </Progress>
+              <ProgressTitles>
+                <ProgressTitle>Aguardando{'\n\t'}Retirada</ProgressTitle>
+                <ProgressTitle>Retirada</ProgressTitle>
+                <ProgressTitle>Entregue</ProgressTitle>
+              </ProgressTitles>
+            </OrderStatus>
+            <OrderInfo>
+              <InfoContent>
+                <InfoTitle>Data</InfoTitle>
+                <Info>{order.create_date_formated}</Info>
+              </InfoContent>
+              <InfoContent>
+                <InfoTitle>Cidade</InfoTitle>
+                <Info>{order.recipient.city}</Info>
+              </InfoContent>
+              <TouchableOpacity>
+                <DetailButtom>Ver detalhes</DetailButtom>
+              </TouchableOpacity>
+            </OrderInfo>
+          </Order>
+        ))}
       </OrdersList>
     </Container>
   );

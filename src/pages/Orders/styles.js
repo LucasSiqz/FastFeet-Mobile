@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  padding: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   background: #fff;
   flex: 1;
 `;
@@ -58,10 +60,13 @@ export const Options = styled.View`
 export const Option = styled.Text`
   padding-left: 15px;
   font-weight: bold;
-  color: #999999;
+  color: ${props => (props.style ? '#999999' : '#7D40E7')};
+  text-decoration: ${props => (props.style ? 'none' : 'underline')};
 `;
 
-export const OrdersList = styled.ScrollView`
+export const OrdersList = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   margin-top: 10px;
 `;
 
@@ -132,7 +137,7 @@ export const Progress = styled.View`
 export const Circle = styled.View`
   width: 9px;
   height: 9px;
-  background: #7d40e7;
+  background: ${props => props.background};
   border-radius: 5px;
   border: 1px #7d40e7;
 `;
@@ -157,4 +162,5 @@ export const ProgressTitle = styled.Text`
   font-size: 8px;
   color: #999999;
   margin-top: 7px;
+  margin-bottom: 16px;
 `;

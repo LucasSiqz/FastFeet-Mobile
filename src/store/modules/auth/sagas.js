@@ -1,5 +1,4 @@
 import { Alert } from 'react-native';
-
 import { parseISO, format } from 'date-fns';
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
