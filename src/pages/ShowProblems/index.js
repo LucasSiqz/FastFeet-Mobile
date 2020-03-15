@@ -18,7 +18,7 @@ import {
 
 export default function ShowProblems() {
   const route = useRoute();
-  const [problems, setProblems] = useState([{}]);
+  const [problems, setProblems] = useState([]);
   const { order } = route.params;
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function ShowProblems() {
         <Title>Encomenda {order.id}</Title>
         <ProblemList>
           {problems.map(problem => (
-            <Card>
+            <Card key={problem.id}>
               <Description>{problem.description}</Description>
               <CreatedDate>{problem.create_date_formated}</CreatedDate>
             </Card>

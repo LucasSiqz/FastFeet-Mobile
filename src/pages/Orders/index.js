@@ -45,7 +45,7 @@ export default function Orders() {
   const { id } = useSelector(state => state.auth);
   const { name } = useSelector(state => state.user.profile);
   const { url } = useSelector(state => state.user.profile.avatar);
-  const [ordersData, setOrdersData] = useState([{}]);
+  const [ordersData, setOrdersData] = useState([]);
   const [oldOrders, setOldOrders] = useState(false);
 
   useEffect(() => {
