@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { parseISO, format } from 'date-fns';
 
@@ -22,6 +22,7 @@ import {
 } from './styles';
 
 export default function OrderDetail() {
+  const navigation = useNavigation();
   const route = useRoute();
   const { order } = route.params;
 
@@ -72,16 +73,19 @@ export default function OrderDetail() {
           </DatesContainer>
         </Card>
         <OptionsContainer>
-          <Option>
+          <Option
+            onPress={() => navigation.navigate('InformProblem', { order })}>
             <Icon name="close-circle-outline" size={25} color="#E74040" />
             <OptionTitle> Informar{'\n'}Problema</OptionTitle>
           </Option>
-          <OptionMiddle>
+          <OptionMiddle
+            onPress={() => navigation.navigate('ShowProblems', { order })}>
             <Icon name="information-outline" size={25} color="#E7BA40" />
             <OptionTitle> Visualizar{'\n'}Problemas</OptionTitle>
           </OptionMiddle>
           {order.start_date ? (
-            <Option>
+            <Option
+              onPress={() => navigation.navigate('ConfirmDelivery', { order })}>
               <Icon name="check-circle-outline" size={25} color="#7D40E7" />
               <OptionTitle>Confirmar{'\n\t'}Entrega</OptionTitle>
             </Option>

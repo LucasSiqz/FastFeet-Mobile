@@ -1,8 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { StatusBar } from 'react-native';
 
-// import { Container } from './styles';
+import { Container, Background, Content } from './styles';
 
 export default function ConfirmDelivery() {
-  return <View />;
+  return (
+    <Container>
+      <StatusBar barStyle="light-content" backgroundColor="#7D40E7" />
+      <Background />
+      <Content />
+    </Container>
+  );
 }

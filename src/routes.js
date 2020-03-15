@@ -65,7 +65,7 @@ function NewStack() {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.goBack();
+                navigation.navigate('OrderDetail');
               }}>
               <Icon name="chevron-left" size={20} color="#FFF" />
             </TouchableOpacity>
@@ -80,7 +80,7 @@ function NewStack() {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.goBack();
+                navigation.navigate('OrderDetail');
               }}>
               <Icon name="chevron-left" size={20} color="#FFF" />
             </TouchableOpacity>
@@ -95,7 +95,7 @@ function NewStack() {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.goBack();
+                navigation.navigate('OrderDetail');
               }}>
               <Icon name="chevron-left" size={20} color="#FFF" />
             </TouchableOpacity>
