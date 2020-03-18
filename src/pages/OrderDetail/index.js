@@ -35,11 +35,13 @@ export default function OrderDetail() {
         {
           start_date: new Date(),
         },
-
-        Alert.alert(
-          'Retirada feita com sucesso!, Os status da encomanda foram atualizados!',
-        ),
       );
+
+      Alert.alert(
+        'Retirada feita com sucesso!, Os status da encomanda foram atualizados!',
+      );
+
+      navigation.popToTop();
     } catch (err) {
       Alert.alert(
         'Falha ao confirmar a entrga',
