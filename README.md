@@ -20,7 +20,7 @@ Esse repositório é referente ao aplicativo mobile do FastFeet desenvolvido em 
 ---
 
 ## Como executar o projeto
-
+- O aplicativo foi feito para dispositivos android.
 - É necessário que o [servidor](https://github.com/LucasSiqz/FastFeet-Backend) esteja rodando na porta 3333.
 
 Clone o repositorio:
