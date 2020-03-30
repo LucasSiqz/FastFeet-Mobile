@@ -9,7 +9,7 @@
 
 ## Descrição:
 
-Esse repositório é referente ao aplicativo mobile do FastFeet desenvolvido em reactjs.
+Esse repositório é referente ao aplicativo mobile do FastFeet desenvolvido em react-native.
 
 ---
 
