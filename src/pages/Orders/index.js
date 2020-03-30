@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
 import { signOut } from '../../store/modules/auth/actions';
+import DefaultAvatar from '../../components/DefaultAvatar';
 
 import {
   Container,
@@ -44,9 +45,10 @@ export default function Orders() {
   const dispatch = useDispatch();
   const { id } = useSelector(state => state.auth);
   const { name } = useSelector(state => state.user.profile);
-  const { url } = useSelector(state => state.user.profile.avatar);
+  const { avatar } = useSelector(state => state.user.profile);
   const [ordersData, setOrdersData] = useState([]);
   const [oldOrders, setOldOrders] = useState(false);
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
     async function loadInitialData() {
@@ -77,8 +79,12 @@ export default function Orders() {
       }
     }
 
+    if (avatar) {
+      setUrl(avatar.url);
+    }
+
     loadInitialData();
-  }, [id, oldOrders]);
+  }, [id, oldOrders, avatar]);
 
   function handleLogout() {
     dispatch(signOut());
@@ -89,7 +95,12 @@ export default function Orders() {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       <InitialContent>
-        <Avatar source={{ uri: url }} />
+        {url ? (
+          <Avatar source={{ uri: url }} />
+        ) : (
+          <DefaultAvatar name={name} size={68} />
+        )}
+
         <WelcomeTextContainer>
           <Welcome>Bem vindo de volta,</Welcome>
           <Title>{name}</Title>

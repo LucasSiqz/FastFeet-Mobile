@@ -27,6 +27,12 @@ export const Avatar = styled.Image`
   align-self: center;
 `;
 
+export const DefaultAvatarView = styled.View`
+  margin-top: 27px;
+  margin-bottom: 40px;
+  align-self: center;
+`;
+
 export const LogoutButton = styled(Button)`
   margin-top: 15px;
 `;
