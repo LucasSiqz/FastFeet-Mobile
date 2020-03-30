@@ -37,7 +37,7 @@ Instale as dependências:
 
 > \$ yarn
 
-- É necessário que um emulador android, e que as portas 3333, 9090 e 8081 estajam expostas, caso necessário execute:
+- É necessário um emulador android, e que as portas 3333, 9090 e 8081 estajam expostas, caso necessário execute:
 
   > adb reverse tcp:8081 tcp:8081
 
