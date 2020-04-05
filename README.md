@@ -9,7 +9,7 @@
 
 ## Descrição:
 
-Esse repositório é referente ao aplicativo mobile do FastFeet desenvolvido em reactjs.
+Esse repositório é referente ao aplicativo mobile do FastFeet desenvolvido em react-native.
 
 ---
 
@@ -20,7 +20,7 @@ Esse repositório é referente ao aplicativo mobile do FastFeet desenvolvido em 
 ---
 
 ## Como executar o projeto
-
+- O aplicativo foi feito para dispositivos android.
 - É necessário que o [servidor](https://github.com/LucasSiqz/FastFeet-Backend) esteja rodando na porta 3333.
 
 Clone o repositorio:
@@ -37,7 +37,7 @@ Instale as dependências:
 
 > \$ yarn
 
-- É necessário que um emulador android, e que as portas 3333, 9090 e 8081 estajam expostas, caso necessário execute:
+- É necessário um emulador android, e que as portas 3333, 9090 e 8081 estajam expostas, caso necessário execute:
 
   > adb reverse tcp:8081 tcp:8081
 
@@ -49,7 +49,7 @@ Execute:
 
 > \$ react-native run-android
 
-Em seguide execute:
+Em seguida execute:
 
 > \$ yarn start
 
