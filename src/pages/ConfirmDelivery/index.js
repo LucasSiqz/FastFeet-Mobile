@@ -20,7 +20,7 @@ import {
 export default function ConfirmDelivery() {
   const navigation = useNavigation();
   const route = useRoute();
-  const { order } = route.params;
+  const { order, reloadInitialData } = route.params;
   const [picture, setPicture] = useState('');
   const cameraRef = useRef(null);
 
@@ -43,6 +43,7 @@ export default function ConfirmDelivery() {
         },
       );
 
+      reloadInitialData();
       navigation.popToTop();
 
       Alert.alert('Entrega finalizada com sucesso!');

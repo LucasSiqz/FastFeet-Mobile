@@ -86,6 +86,20 @@ export default function Orders() {
     loadInitialData();
   }, [id, oldOrders, avatar]);
 
+  async function reloadInitialData() {
+    const response = await api.get(`deliveryman/${id}/deliveries`);
+
+    const data = response.data.map(order => ({
+      ...order,
+      create_date_formated: format(parseISO(order.createdAt), 'dd/MM/yyyy'),
+      city: order.recipient.city,
+      status: 'Pendente',
+      isWithdrawal: !!order.start_date,
+    }));
+
+    setOrdersData(data);
+  }
+
   function handleLogout() {
     dispatch(signOut());
   }
@@ -153,7 +167,12 @@ export default function Orders() {
                 <Info>{order.city}</Info>
               </InfoContent>
               <TouchableOpacity
-                onPress={() => navigation.navigate('OrderDetail', { order })}>
+                onPress={() =>
+                  navigation.navigate('OrderDetail', {
+                    order,
+                    reloadInitialData,
+                  })
+                }>
                 <DetailButtom>Ver detalhes</DetailButtom>
               </TouchableOpacity>
             </OrderInfo>

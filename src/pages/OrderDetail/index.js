@@ -27,6 +27,7 @@ export default function OrderDetail() {
   const navigation = useNavigation();
   const route = useRoute();
   const { order } = route.params;
+  const { reloadInitialData } = route.params;
 
   async function handleWithdraw() {
     try {
@@ -40,6 +41,7 @@ export default function OrderDetail() {
       Alert.alert(
         'Retirada feita com sucesso!, Os status da encomanda foram atualizados!',
       );
+      reloadInitialData();
 
       navigation.popToTop();
     } catch (err) {
@@ -111,7 +113,10 @@ export default function OrderDetail() {
             {order.start_date ? (
               <Option
                 onPress={() =>
-                  navigation.navigate('ConfirmDelivery', { order })
+                  navigation.navigate('ConfirmDelivery', {
+                    order,
+                    reloadInitialData,
+                  })
                 }>
                 <Icon name="check-circle-outline" size={25} color="#7D40E7" />
                 <OptionTitle>Confirmar{'\n\t'}Entrega</OptionTitle>
